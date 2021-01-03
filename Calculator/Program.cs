@@ -21,11 +21,11 @@ namespace Calculator
                 do
                 {
                     Console.Clear();
-                    Console.WriteLine("add - 1");
-                    Console.WriteLine("subtract - 2");
-                    Console.WriteLine("multiply - 3");
-                    Console.WriteLine("divide - 4");
-                    Console.WriteLine("rest of division - 5");
+                    Console.WriteLine("1 - add");
+                    Console.WriteLine("2 - subtract");
+                    Console.WriteLine("3 - multiply");
+                    Console.WriteLine("4 - divide");
+                    Console.WriteLine("5 - rest of division");
                     Console.Write("Press a key to choose an operation: ");
                     keyPressed = Console.ReadKey().Key;
                 } while (!short.TryParse(keyPressed.ToString().Replace("D", null), out operation) || !Enumerable.Range(1, 5).Contains(operation)); // keyPressed can only be between 1 and 5 || D1 -> 1
@@ -58,8 +58,7 @@ namespace Calculator
                 case 3: return "*";
                 case 4: return "/";
                 case 5: return "%";
-            }
-            return null; // null path
+            }return null; // null path
         }
         static String Calculate(String operation, long firstNumber, long secondNumber)
         {
@@ -74,8 +73,7 @@ namespace Calculator
                 case "%":
                     if (secondNumber != 0) return Convert.ToString(firstNumber % secondNumber);
                     else return "impossible"; // impossible operation
-            }
-            return null; // null path
-        }//by Gui1herme#8721
-    }
+            }return null; // null path
+        }
+    }//by Gui1herme#8721
 }
