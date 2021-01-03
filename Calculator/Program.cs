@@ -8,12 +8,12 @@ namespace Calculator
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             bool stop = false;
-            string firstInput, secondInput;
+            string input;
             long firstNumber, secondNumber;
-            short operation;
+            byte operation;
             ConsoleKey keyPressed;
             Console.Title = "Integer calculator - Guilherme Fadário";
             do
@@ -28,20 +28,20 @@ namespace Calculator
                     Console.WriteLine("5 - rest of division");
                     Console.Write("Press a key to choose an operation: ");
                     keyPressed = Console.ReadKey().Key;
-                } while (!short.TryParse(keyPressed.ToString().Replace("D", null), out operation) || !Enumerable.Range(1, 5).Contains(operation)); // keyPressed can only be between 1 and 5 || D1 -> 1
+                } while (!byte.TryParse(keyPressed.ToString().Replace("D", null), out operation) || !Enumerable.Range(1, 5).Contains(operation)); // keyPressed can only be between 1 and 5 || D1 -> 1
                 do
                 {
                     Console.Clear();
                     Console.Write("Choose the first number: ");
-                    firstInput = Console.ReadLine();
-                } while (!long.TryParse(firstInput, out firstNumber)); // firstInput can't have letters, be null or empty and the size of it must be below 19
+                    input = Console.ReadLine();
+                } while (!long.TryParse(input, out firstNumber)); // input can't have letters, be null or empty and the size of it must be below 19
                 do
                 {
                     Console.Clear();
                     Console.WriteLine("The first number is " + firstNumber);
                     Console.Write("Choose the second number: ");
-                    secondInput = Console.ReadLine();
-                } while (!long.TryParse(secondInput, out secondNumber)); // secondInput can't have letters, be null or empty and the size of it must be below 19
+                    input = Console.ReadLine();
+                } while (!long.TryParse(input, out secondNumber)); // input can't have letters, be null or empty and the size of it must be below 19
                 Console.Clear();
                 Console.WriteLine("The output of ({0} {1} {2}) is: {3}", firstNumber, getOperation(operation), secondNumber, Calculate(getOperation(operation), firstNumber, secondNumber));
                 Console.WriteLine("Press ENTER to restart or ESCAPE to close");
@@ -49,9 +49,9 @@ namespace Calculator
                 if (keyPressed == ConsoleKey.Escape) stop = true; // close application
             } while (stop != true);
         }
-        static String getOperation(int i)
+        static String getOperation(byte b)
         {
-            switch (i)
+            switch (b)
             {
                 case 1: return "+";
                 case 2: return "-";
@@ -75,5 +75,5 @@ namespace Calculator
                     else return "impossible"; // impossible operation
             }return null; // null path
         }
-    }//by Gui1herme#8721
-}
+    }
+}//by Gui1herme#8721
