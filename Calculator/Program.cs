@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +12,7 @@ namespace Calculator
         {
             bool stop = false;
             string input;
-            long firstNumber, secondNumber;
+            ulong firstNumber, secondNumber;
             byte operation;
             ConsoleKey keyPressed;
             Console.Title = "Integer calculator - Guilherme Fadário";
@@ -28,26 +28,31 @@ namespace Calculator
                     Console.WriteLine("5 - rest of division");
                     Console.Write("Press a key to choose an operation: ");
                     keyPressed = Console.ReadKey().Key;
-                } while (!byte.TryParse(keyPressed.ToString().Replace("D", null), out operation) || !Enumerable.Range(1, 5).Contains(operation)); // keyPressed can only be between 1 and 5 || D1 -> 1
+                } while (!byte.TryParse(keyPressed.ToString().Replace("D", null), out operation) || !inRange(1, 5, operation)); // keyPressed can only be between 1 and 5 ; D1 -> 1
                 do
                 {
                     Console.Clear();
                     Console.Write("Choose the first number: ");
                     input = Console.ReadLine();
-                } while (!long.TryParse(input, out firstNumber)); // input can't have letters, be null or empty and the size of it must be below 19
+                } while (!ulong.TryParse(input, out firstNumber)); // input can't have letters, be null or empty and must fit into a ulong
                 do
                 {
                     Console.Clear();
-                    Console.WriteLine("The first number is " + firstNumber);
+                    Console.WriteLine($"{firstNumber} {getOperation(operation)} ?");
                     Console.Write("Choose the second number: ");
                     input = Console.ReadLine();
-                } while (!long.TryParse(input, out secondNumber)); // input can't have letters, be null or empty and the size of it must be below 19
+                } while (!ulong.TryParse(input, out secondNumber)); // input can't have letters, be null or empty and must fit into a ulong
                 Console.Clear();
-                Console.WriteLine("The output of ({0} {1} {2}) is: {3}", firstNumber, getOperation(operation), secondNumber, Calculate(getOperation(operation), firstNumber, secondNumber));
+                Console.WriteLine($"The output of ({firstNumber} {getOperation(operation)} {secondNumber}) is: {Calculate(getOperation(operation), firstNumber, secondNumber)}");
                 Console.WriteLine("Press ENTER to restart or ESCAPE to close");
                 keyPressed = Console.ReadKey().Key;
                 if (keyPressed == ConsoleKey.Escape) stop = true; // close application
             } while (stop != true);
+        }
+        static bool inRange(int min, int max, int i)
+        {
+            if (i >= min && i <= max) return true;
+            else return false;
         }
         static String getOperation(byte b)
         {
@@ -60,7 +65,7 @@ namespace Calculator
                 case 5: return "%";
             }return null; // null path
         }
-        static String Calculate(String operation, long firstNumber, long secondNumber)
+        static String Calculate(String operation, ulong firstNumber, ulong secondNumber)
         {
             switch (operation)
             {
