@@ -54,9 +54,9 @@ namespace Calculator
             if (i >= min && i <= max) return true;
             else return false;
         }
-        static String getOperation(byte b)
+        static String getOperation(byte num)
         {
-            switch (b)
+            switch (num)
             {
                 case 1: return "+";
                 case 2: return "-";
