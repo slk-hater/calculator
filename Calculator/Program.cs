@@ -43,7 +43,7 @@ namespace Calculator
                 Console.WriteLine("Press ENTER to restart or ESCAPE to close");
                 keyPressed = Console.ReadKey().Key;
                 if (keyPressed == ConsoleKey.Escape) stop = true; // close application
-            } while (stop != true);
+            } while (!stop); 
         }
         static bool inRange(int min, int max, int i)
         {
