@@ -8,8 +8,8 @@ namespace Calculator
         {
             bool stop = false;
             string input, result;
-            ulong firstNumber, secondNumber;
             byte operation;
+            ulong firstNumber, secondNumber;
             ConsoleKey keyPressed;
             Console.Title = "Long calculator - Guilherme Fadário";
             do
@@ -18,11 +18,11 @@ namespace Calculator
                     do
                     {
                         Console.Clear();
-                        Console.WriteLine("Addition          +  (1)");
-                        Console.WriteLine("Subtract          -  (2)");
-                        Console.WriteLine("Multiply          *  (3)");
-                        Console.WriteLine("Divide            /  (4)");
-                        Console.WriteLine("Rest of division  %  (5)");
+                        Console.WriteLine("Add                   +  (1)");
+                        Console.WriteLine("Subtract              -  (2)");
+                        Console.WriteLine("Multiply              *  (3)");
+                        Console.WriteLine("Divide                /  (4)");
+                        Console.WriteLine("Rest of division      %  (5)");
                         Console.Write("Press a key[1,5] to choose an operation: ");
                         keyPressed = Console.ReadKey(true).Key;
                     } while (!byte.TryParse(keyPressed.ToString().Replace("D", null), out operation) || !inRange(1, 5, operation)); // keyPressed can only be between 1 and 5 ; D1 -> 1
@@ -52,13 +52,15 @@ namespace Calculator
                         {
                             Console.Clear();
                             Console.WriteLine($"Previous calculation: {firstNumber} {getOperation(operation)} {secondNumber} = {result}");
-                            Console.WriteLine("Addition          +  (1)");
-                            Console.WriteLine("Subtract          -  (2)");
-                            Console.WriteLine("Multiply          *  (3)");
-                            Console.WriteLine("Divide            /  (4)");
-                            Console.WriteLine("Rest of division  %  (5)");
-                            Console.Write("Press a key[1,5] to choose another operation: ");
+                            Console.WriteLine("Add                   +  (1)");
+                            Console.WriteLine("Subtract              -  (2)");
+                            Console.WriteLine("Multiply              *  (3)");
+                            Console.WriteLine("Divide                /  (4)");
+                            Console.WriteLine("Rest of division      %  (5)");
+                            Console.WriteLine("Restart the console      (6)");
+                            Console.Write("Press a key[1,6] to choose an operation: ");
                             keyPressed = Console.ReadKey(true).Key;
+                            if (keyPressed.ToString().Replace("D", null) == "6") goto start;
                         } while (!byte.TryParse(keyPressed.ToString().Replace("D", null), out operation) || !inRange(1, 5, operation)); // keyPressed can only be between 1 and 5 ; D1 -> 1
                         do
                         {
@@ -67,6 +69,7 @@ namespace Calculator
                             Console.Write("Choose the second number: ");
                             input = Console.ReadLine();
                         } while (!ulong.TryParse(input, out secondNumber)); // input can't have letters, be null or empty and must fit into a ulong
+                        firstNumber = Convert.ToUInt64(result);
                         result = Calculate(getOperation(operation), Convert.ToUInt64(result), secondNumber);
                         Console.WriteLine($"The output of ({firstNumber} {getOperation(operation)} {secondNumber}) is: {result}");
                         Console.WriteLine("Press TAB to continue, ENTER to restart or ESCAPE to close");
@@ -102,10 +105,10 @@ namespace Calculator
                 case "*": return Convert.ToString(firstNumber * secondNumber);
                 case "/":
                     if (secondNumber != 0) return Convert.ToString(firstNumber / secondNumber);
-                    else return "impossible"; // impossible operation
+                    else return "0"; // impossible operation
                 case "%":
                     if (secondNumber != 0) return Convert.ToString(firstNumber % secondNumber);
-                    else return "impossible"; // impossible operation
+                    else return "0"; // impossible operation
             }return null; // null path
         }
     }
