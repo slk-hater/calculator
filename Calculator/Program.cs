@@ -59,7 +59,7 @@ namespace Calculator
                     Console.WriteLine("Exit the console         (8)");
                     Console.Write("Press a key[1,8] to choose an operation: ");
                     keyPressed = Console.ReadKey(true).Key;
-                    if (keyPressed.ToString().Replace("D", null) == "6") result = null;
+                    if (keyPressed.ToString().Replace("D", null) == "6") result = "0";
                     if (keyPressed.ToString().Replace("D", null) == "7") goto Start;
                     if (keyPressed.ToString().Replace("D", null) == "8") goto ExitConsole;
                 } while (!byte.TryParse(keyPressed.ToString().Replace("D", null), out operation) || !inRange(1, 5, operation)); // keyPressed can only be between 1 and 5 ; D1 -> 1
