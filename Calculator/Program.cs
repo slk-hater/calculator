@@ -21,12 +21,12 @@ namespace Calculator
                 Console.WriteLine("Divide                /  (4)");
                 Console.WriteLine("Rest of division      %  (5)");
                 Console.WriteLine("");
-                Console.WriteLine("Change console color     (6)");
-                Console.WriteLine("Exit the console         (7)");
+                Console.WriteLine("Change console color     (C)");
+                Console.WriteLine("Exit the console         (E)");
                 Console.Write("Press a key[1,7] to choose an operation: ");
                 keyPressed = Console.ReadKey(true).Key;
-                if (keyPressed.ToString().Replace("D", null) == "6") goto ChangeColor;
-                if (keyPressed.ToString().Replace("D", null) == "7") goto ExitConsole;
+                if (keyPressed.ToString().Replace("D", null) == "C") goto ChangeColor;
+                if (keyPressed.ToString().Replace("D", null) == "E") goto ExitConsole;
             } while (!byte.TryParse(keyPressed.ToString().Replace("D", null), out decision) || !inRange(1, 5, decision)); // keyPressed can only be between 1 and 5 ; D1 -> 1
             do
             {
@@ -56,14 +56,14 @@ namespace Calculator
                     Console.WriteLine("Divide                /  (4)");
                     Console.WriteLine("Rest of division      %  (5)");
                     Console.WriteLine("");
-                    Console.WriteLine("Clear the result         (6)");
-                    Console.WriteLine("Restart the console      (7)");
-                    Console.WriteLine("Exit the console         (8)");
+                    Console.WriteLine("Clear the result         (C)");
+                    Console.WriteLine("Restart the console      (R)");
+                    Console.WriteLine("Exit the console         (E)");
                     Console.Write("Press a key[1,8] to choose an operation: ");
                     keyPressed = Console.ReadKey(true).Key;
-                    if (keyPressed.ToString().Replace("D", null) == "6") result = "0";
-                    if (keyPressed.ToString().Replace("D", null) == "7") goto Start;
-                    if (keyPressed.ToString().Replace("D", null) == "8") goto ExitConsole;
+                    if (keyPressed == ConsoleKey.C) result = "0";
+                    if (keyPressed == ConsoleKey.R) goto Start;
+                    if (keyPressed == ConsoleKey.E) goto ExitConsole;
                 } while (!byte.TryParse(keyPressed.ToString().Replace("D", null), out decision) || !inRange(1, 5, decision)); // keyPressed can only be between 1 and 5 ; D1 -> 1
                 do
                 {
@@ -79,28 +79,51 @@ namespace Calculator
             do
             {
                 Console.Clear();
-                Console.WriteLine("White               (1)");
-                Console.WriteLine("Black               (2)");
-                Console.WriteLine("Red                 (3)");
-                Console.WriteLine("Blue                (4)");
-                Console.WriteLine("Green               (5)");
-                Console.WriteLine("Cyan                (6)");
-                Console.Write("Press a key[1,6] to choose a color: ");
+                Console.WriteLine("Background Color:");
+                Console.WriteLine(" Black               (1)");
+                Console.WriteLine(" Red                 (2)");
+                Console.WriteLine(" Blue                (3)");
+                Console.WriteLine(" Green               (4)");
+                Console.WriteLine(" Cyan                (5)");
+                Console.WriteLine("Foreground Color:");
+                Console.WriteLine(" Black               (6)");
+                Console.WriteLine(" Red                 (7)");
+                Console.WriteLine(" Blue                (8)");
+                Console.WriteLine(" Green               (9)");
+                Console.WriteLine(" Cyan                (0)");
+                Console.WriteLine("");
+                Console.WriteLine("Reset both colors    (R)");
+                Console.WriteLine("Exit this menu       (E)");
+                Console.Write("Press a key[0,9] to choose a color: ");
                 keyPressed = Console.ReadKey(true).Key;
-            } while (!byte.TryParse(keyPressed.ToString().Replace("D", null), out decision) || !inRange(1, 6, decision)); // keyPressed can only be between 1 and 5 ; D1 -> 1
+                if(keyPressed == ConsoleKey.R)
+                {
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                }
+                if (keyPressed == ConsoleKey.E) goto Start;
+            } while (!byte.TryParse(keyPressed.ToString().Replace("D", null), out decision) || !inRange(0, 9, decision)); // keyPressed can only be between 1 and 5 ; D1 -> 1
             switch (decision)
             {
-                case 1: Console.BackgroundColor = ConsoleColor.White;
+                case 1: Console.BackgroundColor = ConsoleColor.Black;
                     break;
-                case 2: Console.BackgroundColor = ConsoleColor.Black;
+                case 2: Console.BackgroundColor = ConsoleColor.DarkRed;
                     break;
-                case 3: Console.BackgroundColor = ConsoleColor.DarkRed;
+                case 3: Console.BackgroundColor = ConsoleColor.DarkBlue;
                     break;
-                case 4: Console.BackgroundColor = ConsoleColor.DarkBlue;
+                case 4: Console.BackgroundColor = ConsoleColor.DarkGreen;
                     break;
-                case 5: Console.BackgroundColor = ConsoleColor.DarkGreen;
+                case 5: Console.BackgroundColor = ConsoleColor.DarkCyan;
                     break;
-                case 6: Console.BackgroundColor = ConsoleColor.DarkCyan;
+                case 6: Console.ForegroundColor = ConsoleColor.Black;
+                    break;
+                case 7: Console.ForegroundColor = ConsoleColor.DarkRed;
+                    break;
+                case 8: Console.ForegroundColor = ConsoleColor.DarkBlue;
+                    break;
+                case 9: Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    break;
+                case 0: Console.ForegroundColor = ConsoleColor.DarkCyan;
                     break;
             }
             goto Start;
