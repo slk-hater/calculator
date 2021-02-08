@@ -23,7 +23,7 @@ namespace Calculator
                 Console.WriteLine("");
                 Console.WriteLine("Change console color     (C)");
                 Console.WriteLine("Exit the console         (E)");
-                Console.Write("Press a key[1,7] to choose an operation: ");
+                Console.Write("Press a key[1,5] to choose an operation: ");
                 keyPressed = Console.ReadKey(true).Key;
                 if (keyPressed.ToString().Replace("D", null) == "C") goto ChangeColor;
                 if (keyPressed.ToString().Replace("D", null) == "E") goto ExitConsole;
@@ -59,7 +59,7 @@ namespace Calculator
                     Console.WriteLine("Clear the result         (C)");
                     Console.WriteLine("Restart the console      (R)");
                     Console.WriteLine("Exit the console         (E)");
-                    Console.Write("Press a key[1,8] to choose an operation: ");
+                    Console.Write("Press a key[1,5] to choose an operation: ");
                     keyPressed = Console.ReadKey(true).Key;
                     if (keyPressed == ConsoleKey.C) result = "0";
                     if (keyPressed == ConsoleKey.R) goto Start;
