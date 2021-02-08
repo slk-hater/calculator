@@ -46,10 +46,11 @@ namespace Calculator
         SecondPhase:
             do
             {
+                string lastOperation = getOperation(decision);
                 do
                 {
                     Console.Clear();
-                    Console.WriteLine($"Previous calculation: {firstNumber} {getOperation(decision)} {secondNumber} = {result}");
+                    Console.WriteLine($"Previous calculation: {firstNumber} {lastOperation} {secondNumber} = {result}");
                     Console.WriteLine("Add                   +  (1)");
                     Console.WriteLine("Subtract              -  (2)");
                     Console.WriteLine("Multiply              *  (3)");
@@ -62,8 +63,8 @@ namespace Calculator
                     Console.Write("Press a key[1,5] to choose an operation: ");
                     keyPressed = Console.ReadKey(true).Key;
                     if (keyPressed == ConsoleKey.C) result = "0";
-                    if (keyPressed == ConsoleKey.R) goto Start;
-                    if (keyPressed == ConsoleKey.E) goto ExitConsole;
+                    else if (keyPressed == ConsoleKey.R) goto Start;
+                    else if (keyPressed == ConsoleKey.E) goto ExitConsole;
                 } while (!byte.TryParse(keyPressed.ToString().Replace("D", null), out decision) || !inRange(1, 5, decision)); // keyPressed can only be between 1 and 5 ; D1 -> 1
                 do
                 {
@@ -80,20 +81,20 @@ namespace Calculator
             {
                 Console.Clear();
                 Console.WriteLine("Background Color:");
-                Console.WriteLine(" Black               (1)");
-                Console.WriteLine(" Red                 (2)");
-                Console.WriteLine(" Blue                (3)");
-                Console.WriteLine(" Green               (4)");
-                Console.WriteLine(" Cyan                (5)");
+                Console.WriteLine(" Black                   (1)");
+                Console.WriteLine(" Red                     (2)");
+                Console.WriteLine(" Blue                    (3)");
+                Console.WriteLine(" Green                   (4)");
+                Console.WriteLine(" Cyan                    (5)");
                 Console.WriteLine("Foreground Color:");
-                Console.WriteLine(" Black               (6)");
-                Console.WriteLine(" Red                 (7)");
-                Console.WriteLine(" Blue                (8)");
-                Console.WriteLine(" Green               (9)");
-                Console.WriteLine(" Cyan                (0)");
+                Console.WriteLine(" Black                   (6)");
+                Console.WriteLine(" Red                     (7)");
+                Console.WriteLine(" Blue                    (8)");
+                Console.WriteLine(" Green                   (9)");
+                Console.WriteLine(" Cyan                    (0)");
                 Console.WriteLine("");
-                Console.WriteLine("Reset both colors    (R)");
-                Console.WriteLine("Exit this menu       (E)");
+                Console.WriteLine("Reset both colors        (R)");
+                Console.WriteLine("Exit this menu           (E)");
                 Console.Write("Press a key[0,9] to choose a color: ");
                 keyPressed = Console.ReadKey(true).Key;
                 if(keyPressed == ConsoleKey.R)
@@ -101,8 +102,8 @@ namespace Calculator
                     Console.BackgroundColor = ConsoleColor.Black;
                     Console.ForegroundColor = ConsoleColor.Gray;
                 }
-                if (keyPressed == ConsoleKey.E) goto Start;
-            } while (!byte.TryParse(keyPressed.ToString().Replace("D", null), out decision) || !inRange(0, 9, decision)); // keyPressed can only be between 1 and 5 ; D1 -> 1
+                else if (keyPressed == ConsoleKey.E) goto Start;
+            } while (!byte.TryParse(keyPressed.ToString().Replace("D", null), out decision) || !inRange(0, 9, decision)); // keyPressed can only be between 0 and 9 ; D1 -> 1
             switch (decision)
             {
                 case 1: Console.BackgroundColor = ConsoleColor.Black;
@@ -126,15 +127,11 @@ namespace Calculator
                 case 0: Console.ForegroundColor = ConsoleColor.DarkCyan;
                     break;
             }
-            goto Start;
+            goto ChangeColor;
         ExitConsole:
             Console.Beep();
         }
-        static bool inRange(int min, int max, int i)
-        {
-            if (i >= min && i <= max) return true;
-            else return false;
-        }
+        static bool inRange(int min, int max, int i) { return i >= min && i <= max; }
         static String getOperation(byte num)
         {
             switch (num)
