@@ -38,7 +38,7 @@ namespace Calculator
             do
             {
                 Console.Clear();
-                Console.Write($"{Math.Round(firstOperand, precisionPreference)} {getOperation(decision)} ");
+                Console.Write($"{Math.Round(firstOperand, precisionPreference).ToString("N")} {getOperation(decision)} ");
                 input = Console.ReadLine();
             } while (!double.TryParse(input, out secondOperand)); // input can't have letters, be null or empty and must fit into a double
             result = Calculate(getOperation(decision), firstOperand, secondOperand);
@@ -50,8 +50,8 @@ namespace Calculator
                 do
                 {
                     Console.Clear();
-                    if (lang == "en-US") Console.WriteLine($"Previous calculus: {Math.Round(firstOperand, precisionPreference)} {lastOperation} {Math.Round(secondOperand, precisionPreference)} = {Math.Round(result, precisionPreference)}");
-                    else if (lang == "pt-PT") Console.WriteLine($"Cálculo anterior: {Math.Round(firstOperand, precisionPreference)} {lastOperation} {Math.Round(secondOperand, precisionPreference)} = {Math.Round(result, precisionPreference)}");
+                    if (lang == "en-US") Console.WriteLine($"Previous calculus: ({Math.Round(firstOperand, precisionPreference).ToString("N")} {lastOperation} {Math.Round(secondOperand, precisionPreference).ToString("N")}) = {Math.Round(result, precisionPreference).ToString("N")}");
+                    else if (lang == "pt-PT") Console.WriteLine($"Cálculo anterior: ({Math.Round(firstOperand, precisionPreference).ToString("N")} {lastOperation} {Math.Round(secondOperand, precisionPreference).ToString("N")}) = {Math.Round(result, precisionPreference).ToString("N")}");
                     Console.WriteLine(messageByLang(lang, MessagesEnum.ADD));
                     Console.WriteLine(messageByLang(lang, MessagesEnum.SUBTRACT));
                     Console.WriteLine(messageByLang(lang, MessagesEnum.MULTIPLY));
@@ -70,7 +70,7 @@ namespace Calculator
                 do
                 {
                     Console.Clear();
-                    Console.Write($"{Math.Round(result, precisionPreference)} {getOperation(decision)} ");
+                    Console.Write($"{Math.Round(result, precisionPreference).ToString("N")} {getOperation(decision)} ");
                     input = Console.ReadLine();
                 } while (!double.TryParse(input, out secondOperand)); // input can't have letters, be null or empty and must fit into a double
                 firstOperand = result;
@@ -165,10 +165,18 @@ namespace Calculator
                 string example = "0.";
                 Random random = new Random();
                 for (int i = 1; i <= precisionPreference; i++) example += random.Next(9);
-                if(lang == "en-US") Console.WriteLine($"Current decimal places preference: {precisionPreference} ({example})");
-                else if(lang == "pt-PT") Console.WriteLine($"Atual preferência de casas decimais: {precisionPreference} ({example})");
-                Console.WriteLine("1 DP                       (1)");
-                Console.WriteLine("2 DP (default)             (2)");
+                if (lang == "en-US")
+                {
+                    Console.WriteLine($"Current decimal places preference: {precisionPreference} (ex. {example})");
+                    Console.WriteLine("1 DP                       (1)");
+                    Console.WriteLine("2 DP (default)             (2)");
+                }
+                else if (lang == "pt-PT")
+                {
+                    Console.WriteLine($"Atual preferência de casas decimais: {precisionPreference} (ex. {example})");
+                    Console.WriteLine("1 DP                       (1)");
+                    Console.WriteLine("2 DP (padrão)              (2)");
+                }
                 Console.WriteLine("3 DP                       (3)");
                 Console.WriteLine("4 DP                       (4)");
                 Console.WriteLine("5 DP                       (5)");
