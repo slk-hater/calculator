@@ -11,7 +11,7 @@ namespace Calculator
         double firstOperand, secondOperand, result;
         ConsoleKey keyPressed;
         FirstPhase:
-            Console.Title = messageByLang(lang, MessagesEnum.TITLE);
+            Console.Title = messageByLang(lang, MessagesEnum.CONSOLE_TITLE);
             do
             {
                 Console.Clear();
@@ -100,9 +100,16 @@ namespace Calculator
                 Console.Clear();
                 Console.WriteLine(messageByLang(lang, MessagesEnum.LANGUAGE_MENU));
                 Console.WriteLine("");
-                if (lang == "en-US") Console.WriteLine($"Current language: {lang}");
-                else if (lang == "pt-PT") Console.WriteLine($"Linguagem atual: {lang}");
-                Console.WriteLine("en-US (default)            (1)");
+                if (lang == "en-US")
+                {
+                    Console.WriteLine($"Current language: {lang}");
+                    Console.WriteLine("en-US (default)            (1)");
+                }
+                else if (lang == "pt-PT")
+                {
+                    Console.WriteLine($"Linguagem atual: {lang}");
+                    Console.WriteLine("en-US (padrão)             (1)");
+                }
                 Console.WriteLine("pt-PT                      (2)");
                 Console.WriteLine("");
                 Console.WriteLine(messageByLang(lang, MessagesEnum.EXIT_THIS_MENU));
@@ -164,7 +171,7 @@ namespace Calculator
                 Console.WriteLine("");
                 string example = "0.";
                 Random random = new Random();
-                for (int i = 1; i <= precisionPreference; i++) example += random.Next(9);
+                for (int i = 1; i <= precisionPreference; i++) example += random.Next(9); //random numbers for var 'example'
                 if (lang == "en-US")
                 {
                     Console.WriteLine($"Current decimal places preference: {precisionPreference} (ex. {example})");
@@ -220,11 +227,11 @@ namespace Calculator
         }
         static string messageByLang(String lang, MessagesEnum msg)
         {
-            if (lang == "en-US")
+            if (lang == "en-US") //case Language is English
             {
                 switch (msg)
                 {
-                    case MessagesEnum.TITLE:                    return "Numbers calculator - Guilherme Fadário";
+                    case MessagesEnum.CONSOLE_TITLE:                    return "Numbers calculator - Guilherme Fadário";
                     case MessagesEnum.MAIN_MENU:                return "Calculator - Main menu";
                     case MessagesEnum.ADD:                      return "Add                   +    (1)";
                     case MessagesEnum.SUBTRACT:                 return "Subtract              -    (2)";
@@ -245,11 +252,11 @@ namespace Calculator
                     case MessagesEnum.EXIT_THIS_MENU:           return "Exit this menu             (E)";
                     case MessagesEnum.ASK_FOR_KEY:              return "Press a key[@keys] to choose a @type: ";
                 }
-            }else if(lang == "pt-PT")
+            }else if(lang == "pt-PT") //case Language is Portuguese
             {
                 switch (msg)
                 {
-                    case MessagesEnum.TITLE:                    return "Calculadora de números - Guilherme Fadário";
+                    case MessagesEnum.CONSOLE_TITLE:                    return "Calculadora de números - Guilherme Fadário";
                     case MessagesEnum.MAIN_MENU:                return "Calculadora - Menu principal";
                     case MessagesEnum.ADD:                      return "Adicionar             +    (1)";
                     case MessagesEnum.SUBTRACT:                 return "Subtrair              -    (2)";
@@ -272,9 +279,9 @@ namespace Calculator
                 }
             }return null;
         }
-        enum MessagesEnum
+        enum MessagesEnum //list of message types available
         {
-            TITLE,
+            CONSOLE_TITLE,
             MAIN_MENU,
             ADD,
             SUBTRACT,
