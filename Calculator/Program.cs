@@ -6,12 +6,12 @@ namespace Calculator
     {
         static void Main()
         {
-        string input, result;
+        string input;
         byte decision, precisionPreference=2;
-        double firstOperand, secondOperand;
+        double firstOperand, secondOperand, result;
         ConsoleKey keyPressed;
         Console.Title = "Numbers calculator - Guilherme Fadário";
-        Start:
+        FirstPhase:
             do
             {
                 Console.Clear();
@@ -52,7 +52,7 @@ namespace Calculator
                 do
                 {
                     Console.Clear();
-                    Console.WriteLine($"Previous calculation: {Math.Round(firstOperand, precisionPreference)} {lastOperation} {Math.Round(secondOperand, precisionPreference)} = {Math.Round(Convert.ToDouble(result), precisionPreference)}");
+                    Console.WriteLine($"Previous calculation: {Math.Round(firstOperand, precisionPreference)} {lastOperation} {Math.Round(secondOperand, precisionPreference)} = {Math.Round(result, precisionPreference)}");
                     Console.WriteLine("Add                   +   (1)");
                     Console.WriteLine("Subtract              -   (2)");
                     Console.WriteLine("Multiply              *   (3)");
@@ -64,19 +64,19 @@ namespace Calculator
                     Console.WriteLine("Exit the console          (E)");
                     Console.Write("Press a key[1,5] to choose an operation: ");
                     keyPressed = Console.ReadKey(true).Key;
-                    if (keyPressed == ConsoleKey.C) result = "0";
-                    else if (keyPressed == ConsoleKey.R) goto Start;
+                    if (keyPressed == ConsoleKey.C) result = 0;
+                    else if (keyPressed == ConsoleKey.R) goto FirstPhase;
                     else if (keyPressed == ConsoleKey.E) goto ExitConsole;
                 } while (!byte.TryParse(keyPressed.ToString().Replace("D", null), out decision) || !inRange(1, 5, decision)); // keyPressed can only be between 1 and 5 ; D1 -> 1
                 do
                 {
                     Console.Clear();
-                    Console.WriteLine($"{Math.Round(Convert.ToDouble(result), precisionPreference)} {getOperation(decision)} ?");
+                    Console.WriteLine($"{Math.Round(result, precisionPreference)} {getOperation(decision)} ?");
                     Console.Write("Choose the second operand: ");
                     input = Console.ReadLine();
                 } while (!double.TryParse(input, out secondOperand)); // input can't have letters, be null or empty and must fit into a double
-                firstOperand = Convert.ToDouble(result);
-                result = Calculate(getOperation(decision), Convert.ToDouble(result), secondOperand);
+                firstOperand = result;
+                result = Calculate(getOperation(decision), result, secondOperand);
             } while (true);
         ChangeColor:
             do
@@ -104,7 +104,7 @@ namespace Calculator
                     Console.BackgroundColor = ConsoleColor.Black;
                     Console.ForegroundColor = ConsoleColor.Gray;
                 }
-                else if (keyPressed == ConsoleKey.E) goto Start;
+                else if (keyPressed == ConsoleKey.E) goto FirstPhase;
             } while (!byte.TryParse(keyPressed.ToString().Replace("D", null), out decision) || !inRange(0, 9, decision)); // keyPressed can only be between 0 and 9 ; D1 -> 1
             switch (decision)
             {
@@ -146,7 +146,7 @@ namespace Calculator
                 Console.Write("Press a key[1,5] to choose a color: ");
                 keyPressed = Console.ReadKey(true).Key;
                 if (keyPressed == ConsoleKey.R) precisionPreference = 2;
-                else if (keyPressed == ConsoleKey.E) goto Start;
+                else if (keyPressed == ConsoleKey.E) goto FirstPhase;
             } while (!byte.TryParse(keyPressed.ToString().Replace("D", null), out decision) || !inRange(1, 5, decision)); // keyPressed can only be between 1 and 5 ; D1 -> 1
             precisionPreference = decision;
             goto ChangePrecisionPreference;
@@ -165,22 +165,20 @@ namespace Calculator
                 case 5: return "%";
             }return null; // null path
         }
-        static String Calculate(String operation, double num1, double num2)
+        static double Calculate(String operation, double num1, double num2)
         {
             switch (operation)
             {
-                case "+": return Convert.ToString(num1 + num2);
-                case "-":
-                    if (num1 > num2) return Convert.ToString(num1 - num2);
-                    else return "0"; // impossible operation for double
-                case "*": return Convert.ToString(num1 * num2);
+                case "+": return Convert.ToDouble(num1 + num2);
+                case "-": return Convert.ToDouble(num1 - num2);
+                case "*": return Convert.ToDouble(num1 * num2);
                 case "/":
-                    if (num2 != 0) return Convert.ToString(num1 / num2);
-                    else return "0"; // impossible operation
+                    if (num2 != 0) return Convert.ToDouble(num1 / num2);
+                    else return 0; // impossible operation
                 case "%":
-                    if (num2 != 0) return Convert.ToString(num1 % num2);
-                    else return "0"; // impossible operation
-            }return null; // null path
+                    if (num2 != 0) return Convert.ToDouble(num1 % num2);
+                    else return 0; // impossible operation
+            }return 0; // null path
         }
     }
 }//by Gui1herme#8721
