@@ -11,21 +11,21 @@ namespace Calculator
         double firstOperand, secondOperand, result;
         ConsoleKey keyPressed;
         FirstPhase:
-            Console.Title = messageByLang(lang, MessagesEnum.CONSOLE_TITLE);
+            Console.Title = MultiLang.messageByLang(lang, MultiLang.MessagesEnum.CONSOLE_TITLE);
             do
             {
                 Console.Clear();
-                Console.WriteLine(messageByLang(lang, MessagesEnum.MAIN_MENU));
+                Console.WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.MAIN_MENU));
                 Console.WriteLine("");
-                Console.WriteLine(messageByLang(lang, MessagesEnum.ADD));
-                Console.WriteLine(messageByLang(lang, MessagesEnum.SUBTRACT));
-                Console.WriteLine(messageByLang(lang, MessagesEnum.MULTIPLY));
-                Console.WriteLine(messageByLang(lang, MessagesEnum.DIVIDE));
-                Console.WriteLine(messageByLang(lang, MessagesEnum.REST_OF_DIVISION));
+                Console.WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.ADD));
+                Console.WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.SUBTRACT));
+                Console.WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.MULTIPLY));
+                Console.WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.DIVIDE));
+                Console.WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.REST_OF_DIVISION));
                 Console.WriteLine("");
-                Console.WriteLine(messageByLang(lang, MessagesEnum.SETTINGS));
-                Console.WriteLine(messageByLang(lang, MessagesEnum.EXIT_CONSOLE));
-                Console.Write(messageByLang(lang, MessagesEnum.ASK_FOR_KEY).Replace("@keys", "1, 5").Replace("@type", "operation"));
+                Console.WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.SETTINGS));
+                Console.WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.EXIT_CONSOLE));
+                Console.Write(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.ASK_FOR_KEY).Replace("@keys", "1, 5").Replace("@type", "operation"));
                 keyPressed = Console.ReadKey(true).Key;
                 if (keyPressed == ConsoleKey.E) goto ExitConsole;
                 else if (keyPressed == ConsoleKey.S) goto Settings;
@@ -38,7 +38,7 @@ namespace Calculator
             do
             {
                 Console.Clear();
-                Console.Write($"{Math.Round(firstOperand, precisionPreference).ToString("N")} {getOperation(decision)} ");
+                Console.Write($"{Math.Round(firstOperand, precisionPreference)} {getOperation(decision)} ");
                 input = Console.ReadLine();
             } while (!double.TryParse(input, out secondOperand)); // input can't have letters, be null or empty and must fit into a double
             result = Calculate(getOperation(decision), firstOperand, secondOperand);
@@ -50,18 +50,18 @@ namespace Calculator
                 do
                 {
                     Console.Clear();
-                    if (lang == "en-US") Console.WriteLine($"Previous calculus: ({Math.Round(firstOperand, precisionPreference).ToString("N")} {lastOperation} {Math.Round(secondOperand, precisionPreference).ToString("N")}) = {Math.Round(result, precisionPreference).ToString("N")}");
-                    else if (lang == "pt-PT") Console.WriteLine($"Cálculo anterior: ({Math.Round(firstOperand, precisionPreference).ToString("N")} {lastOperation} {Math.Round(secondOperand, precisionPreference).ToString("N")}) = {Math.Round(result, precisionPreference).ToString("N")}");
-                    Console.WriteLine(messageByLang(lang, MessagesEnum.ADD));
-                    Console.WriteLine(messageByLang(lang, MessagesEnum.SUBTRACT));
-                    Console.WriteLine(messageByLang(lang, MessagesEnum.MULTIPLY));
-                    Console.WriteLine(messageByLang(lang, MessagesEnum.DIVIDE));
-                    Console.WriteLine(messageByLang(lang, MessagesEnum.REST_OF_DIVISION));
+                    if (lang == "en-US") Console.WriteLine($"Previous calculus: ({Math.Round(firstOperand, precisionPreference)} {lastOperation} {Math.Round(secondOperand, precisionPreference)}) = {Math.Round(result, precisionPreference)}");
+                    else if (lang == "pt-PT") Console.WriteLine($"Cálculo anterior: ({Math.Round(firstOperand, precisionPreference)} {lastOperation} {Math.Round(secondOperand, precisionPreference)}) = {Math.Round(result, precisionPreference)}");
+                    Console.WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.ADD));
+                    Console.WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.SUBTRACT));
+                    Console.WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.MULTIPLY));
+                    Console.WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.DIVIDE));
+                    Console.WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.REST_OF_DIVISION));
                     Console.WriteLine("");
-                    Console.WriteLine(messageByLang(lang, MessagesEnum.CLEAR_RESULT));
-                    Console.WriteLine(messageByLang(lang, MessagesEnum.RESTART_CONSOLE));
-                    Console.WriteLine(messageByLang(lang, MessagesEnum.EXIT_CONSOLE));
-                    Console.Write(messageByLang(lang, MessagesEnum.ASK_FOR_KEY).Replace("@keys", "1, 5").Replace("@type", "operation"));
+                    Console.WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.CLEAR_RESULT));
+                    Console.WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.RESTART_CONSOLE));
+                    Console.WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.EXIT_CONSOLE));
+                    Console.Write(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.ASK_FOR_KEY).Replace("@keys", "1, 5").Replace("@type", "operation"));
                     keyPressed = Console.ReadKey(true).Key;
                     if (keyPressed == ConsoleKey.C) result = 0;
                     else if (keyPressed == ConsoleKey.R) goto FirstPhase;
@@ -70,7 +70,7 @@ namespace Calculator
                 do
                 {
                     Console.Clear();
-                    Console.Write($"{Math.Round(result, precisionPreference).ToString("N")} {getOperation(decision)} ");
+                    Console.Write($"{Math.Round(result, precisionPreference)} {getOperation(decision)} ");
                     input = Console.ReadLine();
                 } while (!double.TryParse(input, out secondOperand)); // input can't have letters, be null or empty and must fit into a double
                 firstOperand = result;
@@ -80,14 +80,14 @@ namespace Calculator
             do
             {
                 Console.Clear();
-                Console.WriteLine(messageByLang(lang, MessagesEnum.SETTINGS_MENU));
+                Console.WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.SETTINGS_MENU));
                 Console.WriteLine("");
-                Console.WriteLine(messageByLang(lang, MessagesEnum.CHANGE_LANGUAGE));
-                Console.WriteLine(messageByLang(lang, MessagesEnum.CHANGE_COLOR));
-                Console.WriteLine(messageByLang(lang, MessagesEnum.DECIMAL_PLACES_PREFERENCE));
+                Console.WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.CHANGE_LANGUAGE));
+                Console.WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.CHANGE_COLOR));
+                Console.WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.DECIMAL_PLACES_PREFERENCE));
                 Console.WriteLine("");
-                Console.WriteLine(messageByLang(lang, MessagesEnum.EXIT_THIS_MENU));
-                Console.Write(messageByLang(lang, MessagesEnum.ASK_FOR_KEY).Replace("@keys", "L, C, D").Replace("@type", "setting"));
+                Console.WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.EXIT_THIS_MENU));
+                Console.Write(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.ASK_FOR_KEY).Replace("@keys", "L, C, D").Replace("@type", "setting"));
                 keyPressed = Console.ReadKey(true).Key;
                 if (keyPressed == ConsoleKey.L) goto ChangeLanguage;
                 else if (keyPressed == ConsoleKey.C) goto ChangeColor;
@@ -98,7 +98,7 @@ namespace Calculator
             do
             {
                 Console.Clear();
-                Console.WriteLine(messageByLang(lang, MessagesEnum.LANGUAGE_MENU));
+                Console.WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.LANGUAGE_MENU));
                 Console.WriteLine("");
                 if (lang == "en-US")
                 {
@@ -112,8 +112,8 @@ namespace Calculator
                 }
                 Console.WriteLine("pt-PT                      (2)");
                 Console.WriteLine("");
-                Console.WriteLine(messageByLang(lang, MessagesEnum.EXIT_THIS_MENU));
-                Console.Write(messageByLang(lang, MessagesEnum.ASK_FOR_KEY).Replace("@keys", "1, 2").Replace("@type", "language"));
+                Console.WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.EXIT_THIS_MENU));
+                Console.Write(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.ASK_FOR_KEY).Replace("@keys", "1, 2").Replace("@type", "language"));
                 keyPressed = Console.ReadKey(true).Key;
                 if(keyPressed == ConsoleKey.E) goto Settings;
             } while (!byte.TryParse(keyPressed.ToString().Replace("D", null), out decision) || !inRange(1, 2, decision)); // keyPressed can only be between 1 and 2 ; D1 -> 1
@@ -124,7 +124,7 @@ namespace Calculator
             do
             {
                 Console.Clear();
-                Console.WriteLine(messageByLang(lang, MessagesEnum.COLORS_MENU));
+                Console.WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.COLORS_MENU));
                 Console.WriteLine("");
                 Console.WriteLine("Background Color:");
                 Console.WriteLine(" Black                     (1)");
@@ -140,8 +140,8 @@ namespace Calculator
                 Console.WriteLine(" Cyan                      (0)");
                 Console.WriteLine("");
                 Console.WriteLine("Reset both colors          (R)");
-                Console.WriteLine(messageByLang(lang, MessagesEnum.EXIT_THIS_MENU));
-                Console.Write(messageByLang(lang, MessagesEnum.ASK_FOR_KEY).Replace("@keys", "0, 9").Replace("@type", "color"));
+                Console.WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.EXIT_THIS_MENU));
+                Console.Write(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.ASK_FOR_KEY).Replace("@keys", "0, 9").Replace("@type", "color"));
                 keyPressed = Console.ReadKey(true).Key;
                 if(keyPressed == ConsoleKey.R)
                 {
@@ -167,7 +167,7 @@ namespace Calculator
             do
             {
                 Console.Clear();
-                Console.WriteLine(messageByLang(lang, MessagesEnum.DECIMAL_PLACES_PREFERENCE_MENU));
+                Console.WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.DECIMAL_PLACES_PREFERENCE_MENU));
                 Console.WriteLine("");
                 string example = "0.";
                 Random random = new Random();
@@ -188,8 +188,8 @@ namespace Calculator
                 Console.WriteLine("4 DP                       (4)");
                 Console.WriteLine("5 DP                       (5)");
                 Console.WriteLine("");
-                Console.WriteLine(messageByLang(lang, MessagesEnum.EXIT_THIS_MENU));
-                Console.Write(messageByLang(lang, MessagesEnum.ASK_FOR_KEY).Replace("@keys", "1, 5").Replace("@type", "preference"));
+                Console.WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.EXIT_THIS_MENU));
+                Console.Write(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.ASK_FOR_KEY).Replace("@keys", "1, 5").Replace("@type", "preference"));
                 keyPressed = Console.ReadKey(true).Key;
                 if (keyPressed == ConsoleKey.E) goto Settings;
             } while (!byte.TryParse(keyPressed.ToString().Replace("D", null), out decision) || !inRange(1, 5, decision)); // keyPressed can only be between 1 and 5 ; D1 -> 1
@@ -224,83 +224,6 @@ namespace Calculator
                     if (num2 != 0) return num1 % num2;
                     else return 0; // impossible operation
             }return 0; // null path
-        }
-        static string messageByLang(String lang, MessagesEnum msg)
-        {
-            if (lang == "en-US") //case Language is English
-            {
-                switch (msg)
-                {
-                    case MessagesEnum.CONSOLE_TITLE:                    return "Numbers calculator - Guilherme Fadário";
-                    case MessagesEnum.MAIN_MENU:                return "Calculator - Main menu";
-                    case MessagesEnum.ADD:                      return "Add                   +    (1)";
-                    case MessagesEnum.SUBTRACT:                 return "Subtract              -    (2)";
-                    case MessagesEnum.MULTIPLY:                 return "Multiply              *    (3)";
-                    case MessagesEnum.DIVIDE:                   return "Divide                /    (4)";
-                    case MessagesEnum.REST_OF_DIVISION:         return "Rest of division      %    (5)";
-                    case MessagesEnum.SETTINGS:                 return "Settings                   (S)";
-                    case MessagesEnum.SETTINGS_MENU:            return "Calculator - Settings menu";
-                    case MessagesEnum.CHANGE_LANGUAGE:          return "Change language            (L)";
-                    case MessagesEnum.LANGUAGE_MENU:            return "Calculator - Languages menu";
-                    case MessagesEnum.CHANGE_COLOR:             return "Change console color       (C)";
-                    case MessagesEnum.COLORS_MENU:              return "Calculator - Colors menu";
-                    case MessagesEnum.DECIMAL_PLACES_PREFERENCE:return "Decimal places preference  (D)";
-                    case MessagesEnum.DECIMAL_PLACES_PREFERENCE_MENU:return "Calculator - Decimal places menu";
-                    case MessagesEnum.CLEAR_RESULT:             return "Clear the result           (C)";
-                    case MessagesEnum.RESTART_CONSOLE:          return "Restart the console        (R)";
-                    case MessagesEnum.EXIT_CONSOLE:             return "Exit the console           (E)";
-                    case MessagesEnum.EXIT_THIS_MENU:           return "Exit this menu             (E)";
-                    case MessagesEnum.ASK_FOR_KEY:              return "Press a key[@keys] to choose a @type: ";
-                }
-            }else if(lang == "pt-PT") //case Language is Portuguese
-            {
-                switch (msg)
-                {
-                    case MessagesEnum.CONSOLE_TITLE:                    return "Calculadora de números - Guilherme Fadário";
-                    case MessagesEnum.MAIN_MENU:                return "Calculadora - Menu principal";
-                    case MessagesEnum.ADD:                      return "Adicionar             +    (1)";
-                    case MessagesEnum.SUBTRACT:                 return "Subtrair              -    (2)";
-                    case MessagesEnum.MULTIPLY:                 return "Multiplicar           *    (3)";
-                    case MessagesEnum.DIVIDE:                   return "Dividir               /    (4)";
-                    case MessagesEnum.REST_OF_DIVISION:         return "Resto de divisão      %    (5)";
-                    case MessagesEnum.SETTINGS:                 return "Definições                 (S)";
-                    case MessagesEnum.SETTINGS_MENU:            return "Calculadora - Menu de definições";
-                    case MessagesEnum.CHANGE_LANGUAGE:          return "Alterar linguagem          (L)";
-                    case MessagesEnum.LANGUAGE_MENU:            return "Calculadora - Menu de linguagens";
-                    case MessagesEnum.CHANGE_COLOR:             return "Alterar cor da consola     (C)";
-                    case MessagesEnum.COLORS_MENU:              return "Calculadora - Menu de cores";
-                    case MessagesEnum.DECIMAL_PLACES_PREFERENCE:return "Preferência casas decimais (D)";
-                    case MessagesEnum.DECIMAL_PLACES_PREFERENCE_MENU:return "Calculadora - Menu de casas decimais";
-                    case MessagesEnum.CLEAR_RESULT:             return "Limpar o resultado         (C)";
-                    case MessagesEnum.RESTART_CONSOLE:          return "Reiniciar a consola        (R)";
-                    case MessagesEnum.EXIT_CONSOLE:             return "Sair da consola            (E)";
-                    case MessagesEnum.EXIT_THIS_MENU:           return "Sair deste menu            (E)";
-                    case MessagesEnum.ASK_FOR_KEY:              return "Pressione uma tecla[@keys] para escolher uma @type: ";
-                }
-            }return null;
-        }
-        enum MessagesEnum //list of message types available
-        {
-            CONSOLE_TITLE,
-            MAIN_MENU,
-            ADD,
-            SUBTRACT,
-            MULTIPLY,
-            DIVIDE,
-            REST_OF_DIVISION,
-            SETTINGS,
-            SETTINGS_MENU,
-            CHANGE_LANGUAGE,
-            LANGUAGE_MENU,
-            CHANGE_COLOR,
-            COLORS_MENU,
-            DECIMAL_PLACES_PREFERENCE,
-            DECIMAL_PLACES_PREFERENCE_MENU,
-            CLEAR_RESULT,
-            RESTART_CONSOLE,
-            EXIT_CONSOLE,
-            EXIT_THIS_MENU,
-            ASK_FOR_KEY
         }
     }
 }//by Gui1herme#8721
