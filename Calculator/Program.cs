@@ -38,7 +38,7 @@ namespace Calculator
                 WriteLine("");
                 WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.SETTINGS));
                 WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.EXIT_CONSOLE));
-                Write(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.ASK_FOR_KEY).Replace("@keys", "1, 5").Replace("@type", "operation"));
+                Write(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.ASK_FOR_KEY).Replace("@keys", "1, 5").Replace("@type", MultiLang.stringByLang(lang, "operation", "operaçao")));
                 keyPressed = ReadKey(true).Key;
                 if (keyPressed == ConsoleKey.E) goto ExitConsole;
                 else if (keyPressed == ConsoleKey.S) goto Settings;
@@ -74,7 +74,7 @@ namespace Calculator
                     WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.CLEAR_RESULT));
                     WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.RESTART_CONSOLE));
                     WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.EXIT_CONSOLE));
-                    Write(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.ASK_FOR_KEY).Replace("@keys", "1, 5").Replace("@type", "operation"));
+                    Write(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.ASK_FOR_KEY).Replace("@keys", "1, 5").Replace("@type", MultiLang.stringByLang(lang, "operation", "operaçao")));
                     keyPressed = ReadKey(true).Key;
                     if (keyPressed == ConsoleKey.C) result = 0;
                     else if (keyPressed == ConsoleKey.R) goto FirstPhase;
@@ -100,7 +100,7 @@ namespace Calculator
                 WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.DECIMAL_PLACES_PREFERENCE));
                 WriteLine("");
                 WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.EXIT_THIS_MENU));
-                Write(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.ASK_FOR_KEY).Replace("@keys", "L, C, D").Replace("@type", "setting"));
+                Write(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.ASK_FOR_KEY).Replace("@keys", "L, C, D").Replace("@type", MultiLang.stringByLang(lang, "setting", "definiçao")));
                 keyPressed = ReadKey(true).Key;
                 if (keyPressed == ConsoleKey.L) goto ChangeLanguage;
                 else if (keyPressed == ConsoleKey.C) goto ChangeColor;
@@ -116,17 +116,17 @@ namespace Calculator
                 if (lang == "en-US")
                 {
                     WriteLine($"Current language: {lang}");
-                    WriteLine("en-US (default)            (1)");
+                    WriteLine(" en-US (default)            (1)");
                 }
                 else if (lang == "pt-PT")
                 {
                     WriteLine($"Linguagem atual: {lang}");
-                    WriteLine("en-US (padrão)             (1)");
+                    WriteLine(" en-US (padrão)             (1)");
                 }
-                WriteLine("pt-PT                      (2)");
+                WriteLine(" pt-PT                      (2)");
                 WriteLine("");
                 WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.EXIT_THIS_MENU));
-                Write(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.ASK_FOR_KEY).Replace("@keys", "1, 2").Replace("@type", "language"));
+                Write(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.ASK_FOR_KEY).Replace("@keys", "1, 2").Replace("@type", MultiLang.stringByLang(lang, "language", "linguagem")));
                 keyPressed = ReadKey(true).Key;
                 if(keyPressed == ConsoleKey.E) goto Settings;
             } while (!byte.TryParse(keyPressed.ToString().Replace("D", null), out decision) || !inRange(1, 2, decision)); // keyPressed can only be between 1 and 2 ; D1 -> 1
@@ -140,21 +140,21 @@ namespace Calculator
                 WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.COLORS_MENU));
                 WriteLine("");
                 WriteLine("Background Color:");
-                WriteLine(" Black                     (1)");
-                WriteLine(" Red                       (2)");
-                WriteLine(" Blue                      (3)");
-                WriteLine(" Green                     (4)");
-                WriteLine(" Cyan                      (5)");
+                WriteLine(" Black                      (1)");
+                WriteLine(" Red                        (2)");
+                WriteLine(" Blue                       (3)");
+                WriteLine(" Green                      (4)");
+                WriteLine(" Cyan                       (5)");
                 WriteLine("Foreground Color:");
-                WriteLine(" Black                     (6)");
-                WriteLine(" Red                       (7)");
-                WriteLine(" Blue                      (8)");
-                WriteLine(" Green                     (9)");
-                WriteLine(" Cyan                      (0)");
+                WriteLine(" Black                      (6)");
+                WriteLine(" Red                        (7)");
+                WriteLine(" Blue                       (8)");
+                WriteLine(" Green                      (9)");
+                WriteLine(" Cyan                       (0)");
                 WriteLine("");
-                WriteLine("Reset both colors          (R)");
+                WriteLine("Reset both colors           (R)");
                 WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.EXIT_THIS_MENU));
-                Write(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.ASK_FOR_KEY).Replace("@keys", "0, 9").Replace("@type", "color"));
+                Write(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.ASK_FOR_KEY).Replace("@keys", "0, 9").Replace("@type", MultiLang.stringByLang(lang, "color", "cor")));
                 keyPressed = ReadKey(true).Key;
                 if(keyPressed == ConsoleKey.R)
                 {
@@ -188,21 +188,19 @@ namespace Calculator
                 if (lang == "en-US")
                 {
                     WriteLine($"Current decimal places preference: {precisionPreference} (ex. {example})");
-                    WriteLine("1 DP                       (1)");
-                    WriteLine("2 DP (default)             (2)");
+                    WriteLine(" 1 DP                       (1)");
+                    WriteLine(" 2 DP (default)             (2)");
                 }
                 else if (lang == "pt-PT")
                 {
                     WriteLine($"Atual preferência de casas decimais: {precisionPreference} (ex. {example})");
-                    WriteLine("1 DP                       (1)");
-                    WriteLine("2 DP (padrão)              (2)");
+                    WriteLine(" 1 DP                       (1)");
+                    WriteLine(" 2 DP (padrão)              (2)");
                 }
-                WriteLine("3 DP                       (3)");
-                WriteLine("4 DP                       (4)");
-                WriteLine("5 DP                       (5)");
+                for (int i = 3; i <= 5; i++) Console.WriteLine($" {i} DP                       ({i})");
                 WriteLine("");
                 WriteLine(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.EXIT_THIS_MENU));
-                Write(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.ASK_FOR_KEY).Replace("@keys", "1, 5").Replace("@type", "preference"));
+                Write(MultiLang.messageByLang(lang, MultiLang.MessagesEnum.ASK_FOR_KEY).Replace("@keys", "1, 5").Replace("@type", MultiLang.stringByLang(lang, "preference", "preferência")));
                 keyPressed = ReadKey(true).Key;
                 if (keyPressed == ConsoleKey.E) goto Settings;
             } while (!byte.TryParse(keyPressed.ToString().Replace("D", null), out decision) || !inRange(1, 5, decision)); // keyPressed can only be between 1 and 5 ; D1 -> 1
